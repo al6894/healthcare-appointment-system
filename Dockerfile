@@ -26,4 +26,4 @@ COPY . /app
 EXPOSE 5000
 
 # Command to run the app
-CMD ["python", "src/provider_service/app.py"]
+CMD ["sh", "-c", "python src/provider_service/app.py"]
