@@ -56,7 +56,7 @@ def search():
         query["_id"] = {"$in": provider_ids}
 
     try:
-        results = list(db["provider-data"].find(query, {"_id":0, "type":0, "geometry":0, "provider.Organization Name":0, "provider.Provider First Line Location Address":0, "provider.Provider Second Line Location Address":0, "provider.City":0, "provider.State":0, "provider.Postal Code":0}).limit(20))
+        results = list(db["provider-data"].find(query, {"type":0, "geometry":0, "properties.NPI":0, "properties.Organization Name":0, "properties.Provider First Line Location Address":0, "properties.Provider Second Line Location Address":0, "properties.City":0, "properties.State":0, "properties.Postal Code":0}).limit(20))
         return jsonify(results), 200
     except Exception as e:
         print("Error querying the database:", e)
