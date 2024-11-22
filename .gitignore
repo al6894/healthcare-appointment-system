@@ -38,9 +38,11 @@ next-env.d.ts
 # csv
 *.csv
 
-#geojson
+# geojson
 *.geojson
 
-.venv/
+# venv
+/venv
+
 __pycache__/
-.idea/
+.pytest_cache/
