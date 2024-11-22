@@ -2,7 +2,7 @@ import random
 from pymongo import MongoClient
 
 # Connect to MongoDB
-client = MongoClient('mongodb+srv://al6894:design%25@dev-cluster.7q4va.mongodb.net/')
+client = MongoClient('')
 db = client['MedConnect']
 
 # Collections
