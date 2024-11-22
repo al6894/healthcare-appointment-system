@@ -5,6 +5,7 @@ FROM python:3.12-slim
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONPATH=/app/src
+#ENV PYTHONPATH=/src/provider_service
 
 # Set the working directory in the container
 WORKDIR /app
@@ -23,4 +24,5 @@ COPY . /app
 EXPOSE 5000
 
 # Command to run the app with Gunicorn
+#CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "src.provider_service.app:app"]
 CMD ["python", "src/provider_service/app.py"]
