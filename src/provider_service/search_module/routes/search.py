@@ -42,9 +42,8 @@ def search():
 
     # Check if given specialty exists
     if specialty:
-        taxonomy_doc = get_taxonomy_code(specialty)
-        if taxonomy_doc:
-            taxonomy_code = taxonomy_doc.get("code")
+        taxonomy_code = get_taxonomy_code(specialty)
+        if taxonomy_code:
             query["taxonomy_codes"] = {"$in": [taxonomy_code]}
         else:
             return jsonify({"error": "Specialty not found"}), 400
