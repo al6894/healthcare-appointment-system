@@ -82,7 +82,8 @@ def search_provider():
         return jsonify({"error": "NPI is required"}), 400
         
     try:
-        provider = db["provider-data"].find_one({"properties.NPI": npi}) 
+        # 1447253471
+        provider = db["provider-data"].find_one({"properties.NPI": npi}, {"properties.Provider First Line Location Address":0, "properties.Provider Second Line Location Address":0, "properties.City":0, "properties.State":0, "properties.Postal Code":0, "type":0, "geometry":0}) 
         
         # If no provider is found, return an error message
         if not provider:
