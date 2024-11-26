@@ -72,7 +72,7 @@ def search():
         print("Error querying the database:", e)
         return jsonify({"error": str(e)}), 500
     
-@search_provider_bp("search-provider", methods = ['GET'])
+@search_provider_bp.route("search-provider", methods = ['GET'])
 def search_provider():
     if request.method == 'GET':
         npi = request.args.get("id")
