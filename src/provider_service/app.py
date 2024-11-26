@@ -11,11 +11,13 @@ load_dotenv()
 
 app = Flask(__name__)
 # CORS will be used for deployment, accepts requests from the frontend defined by the link
-CORS(app, resources={r"/providers/*": {"origins": "https://design-project-phi.vercel.app/"}})
+#CORS(app, resources={r"/providers/*": {"origins": "https://design-project-phi.vercel.app/"}})
+CORS(app)
 # Set secret key for the Flask app
 app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 # Test MongoDB connection
 test_connection()
+CORS(search_bp)
 # Register blueprints
 app.register_blueprint(search_bp, url_prefix='/providers')
 
