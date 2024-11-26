@@ -7,7 +7,7 @@ from mongodb_connection import db
 # Create a Blueprint
 search_bp = Blueprint('search_bp', __name__)
 
-@search_bp.route('/search', methods=['POST', 'OPTIONS'])
+@search_bp.route('/search', methods=['GET','POST', 'OPTIONS'])
 def search():
     data = request.get_json()
     street = data.get("street")
