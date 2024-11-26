@@ -9,14 +9,23 @@ search_bp = Blueprint('search_bp', __name__)
 
 @search_bp.route('/search', methods=['GET','POST', 'OPTIONS'])
 def search():
-    data = request.get_json()
-    street = data.get("street")
-    city = data.get("city")
-    state = data.get("state")
-    zip_code = data.get("zip")
-    specialty = data.get("specialty")
-    insurance = data.get("insurance")
-    radius_miles = data.get("radius", 10)  # Radius in miles
+    if request.method == 'POST':
+        data = request.get_json()
+        street = data.get("street")
+        city = data.get("city")
+        state = data.get("state")
+        zip_code = data.get("zip")
+        specialty = data.get("specialty")
+        insurance = data.get("insurance")
+        radius_miles = data.get("radius", 10)  # Radius in miles
+    elif request.method == 'GET':
+        street = request.args.get("street")
+        city = request.args.get("city")
+        state = request.args.get("state")
+        zip_code = request.args.get("zip")
+        specialty = request.args.get("specialty")
+        insurance = request.args.get("insurance")
+        radius_miles = float(request.args.get("radius", 10))  # Convert to float for consistency
 
     # Convert radius from miles to meters
     radius_meters = radius_miles * 1609.34
