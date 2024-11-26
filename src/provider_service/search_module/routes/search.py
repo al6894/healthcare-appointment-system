@@ -6,6 +6,7 @@ from mongodb_connection import db
 
 # Create a Blueprint
 search_bp = Blueprint('search_bp', __name__)
+search_provider_bp = Blueprint("search_provider_bp", __name__)
 
 @search_bp.route('/search', methods=['GET','POST', 'OPTIONS'])
 def search():
@@ -70,3 +71,26 @@ def search():
     except Exception as e:
         print("Error querying the database:", e)
         return jsonify({"error": str(e)}), 500
+    
+@search_provider_bp("search-provider", methods = ['GET'])
+def search_provider():
+    if request.method == 'GET':
+        npi = request.args.get("id")
+        
+    # Validate that the NPI is provided
+    if not npi:
+        return jsonify({"error": "NPI is required"}), 400
+        
+    try:
+        provider = db["provider-data"].find_one({"properties.NPI": npi}) 
+        
+        # If no provider is found, return an error message
+        if not provider:
+            return jsonify({"error": "No provider found with the given NPI"}), 404
+        
+        # Return the provider details
+        return jsonify(provider), 200
+    except Exception as e:
+        # Handle any database or query-related errors
+        print("Error querying the database:", e)
+        return jsonify({"error": "An internal server error occurred"}), 500

@@ -3,6 +3,7 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 from mongodb_connection import test_connection
 from search_module.routes.search import search_bp
+from search_module.routes.search import search_provider_bp
 import os
 
 
@@ -18,8 +19,10 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 # Test MongoDB connection
 test_connection()
 CORS(search_bp)
+CORS(search_provider_bp)
 # Register blueprints
 app.register_blueprint(search_bp, url_prefix='/providers')
+app.register_blueprint(search_provider_bp, url_prefix='/providers')
 
 # Add this block to run the app when the script is executed
 if __name__ == "__main__":
